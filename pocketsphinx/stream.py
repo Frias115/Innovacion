@@ -1,7 +1,8 @@
 #!/usr/bin/env python
 
 import os
-from pocketsphinx import LiveSpeech, get_model_path
+import subprocess
+from pocketsphinx import LiveSpeech
 from os import environ, path
 
 #model_path = get_model_path()
@@ -24,6 +25,7 @@ print 'Escuchando...'
 for phrase in speech:
     if str(phrase) == 'hola':
         print('Gotcha')
+        subprocess.check_call(["gnome-screensaver-command", "-l"])
         print(phrase.segments(detailed=True))
     #print(phrase)
 
