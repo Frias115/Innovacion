@@ -1,0 +1,8 @@
+verbose: False
+sampling_rate: 16000
+buffer_size: 2048
+no_search: False
+full_utt: False
+hmm: pocketsphinx-python/pocketsphinx/model/es-es/es-es
+lm: pocketsphinx-python/pocketsphinx/model/es-es/spanish.lm.bin
+dic: pocketsphinx-python/pocketsphinx/model/es-es/spanish.dict
