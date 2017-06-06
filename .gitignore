@@ -90,3 +90,9 @@ ENV/
 
 #Google cloud sdk
 google-cloud-sdk/
+
+pocketsphinx/email\.txt
+
+pocketsphinx/history\.txt
+
+pocketsphinx/log\.txt
