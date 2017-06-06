@@ -1,0 +1,4 @@
+# complete, rename to 'email.txt' and delete this line
+user: @gmail.com
+password:
+to: @gmail.com
