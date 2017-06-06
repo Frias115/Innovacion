@@ -1,29 +1,33 @@
 #!/usr/bin/env python
 
 import os
-from pocketsphinx import LiveSpeech, get_model_path
+import subprocess
+from pocketsphinx import LiveSpeech
 from os import environ, path
+from yaml import load, dump
+try:
+    from yaml import CLoader as Loader, CDumper as Dumper
+except ImportError:
+    from yaml import Loader, Dumper
 
-#model_path = get_model_path()
+with open("properties.txt", 'r') as stream:
+    data_loaded = load(stream)
 
-MODELDIR = "pocketsphinx-python/pocketsphinx/model"
-DATADIR = "pocketsphinx-pyton/pocketsphinx/test/data"
+speech = LiveSpeech(**data_loaded)
 
-speech = LiveSpeech(
-    verbose=False,
-    sampling_rate=16000,
-    buffer_size=2048,
-    no_search=False,
-    full_utt=False,
-    hmm=os.path.join(MODELDIR, 'es-es/es-es'),
-    lm=os.path.join(MODELDIR, 'es-es/spanish.lm.bin'),
-    dic=os.path.join(MODELDIR, 'es-es/spanish.dict')
-)
+words_to_ban = set(line.strip() for line in open('words_to_ban.txt'))
 
 print 'Escuchando...'
+for word in words_to_ban:
+    print  word
 for phrase in speech:
-    if str(phrase) == 'hola':
-        print('Gotcha')
-        print(phrase.segments(detailed=True))
-    #print(phrase)
+    for word in words_to_ban:
+        if str(phrase) == word:
+            print('Gotcha')
+            subprocess.check_call(["gnome-screensaver-command", "-l"])
+            print(phrase.segments(detailed=True))
+            #print(phrase)
 
+#email cada semana
+#cambio de contraseña
+#log y estadisticas
